@@ -1,0 +1,7 @@
+# Example list containing tuples
+data = [(1, 2), (3, 4), (5, 6), (7, 8)]
+
+# Count the number of tuples
+num_tuples = len(data)
+
+print(f"The number of tuples is: {num_tuples}")

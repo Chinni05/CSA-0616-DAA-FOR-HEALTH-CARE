@@ -1,0 +1,31 @@
+def is_safe(board, row, col, obstacles):
+    if (row, col) in obstacles: return False
+    for r in range(row):
+        if board[r] == col or abs(board[r] - col) == row - r:
+            return False
+    return True
+
+def solve(board, row, n, m, obstacles):
+    if row == n: return [board[:]]
+    solutions = []
+    for col in range(m):
+        if is_safe(board, row, col, obstacles):
+            board[row] = col
+            solutions.extend(solve(board, row + 1, n, m, obstacles))
+            board[row] = -1
+    return solutions
+
+def n_queens(n, m, obstacles):
+    board = [-1] * n
+    return solve(board, 0, n, m, obstacles)
+
+# Example: 4x5 board with obstacles at (1, 2) and (2, 3)
+n, m = 4, 5
+obstacles = {(1, 2), (2, 3)}
+solutions = n_queens(n, m, obstacles)
+
+# Output solutions
+for sol in solutions:
+    for r in range(n):
+        print(" ".join(['Q' if sol[r] == c else '.' for c in range(m)]))
+    print()

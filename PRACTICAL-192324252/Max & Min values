@@ -1,0 +1,10 @@
+# Example list
+numbers = [3, 7, 1, 9, 4, 5]
+
+# Find max and min values
+max_value = max(numbers)
+min_value = min(numbers)
+
+# Display results
+print(f"Maximum value: {max_value}")
+print(f"Minimum value: {min_value}")

@@ -1,0 +1,15 @@
+import time
+def process_product(product):
+    """Simulate processing a product."""
+    print(f"Processing product: {product}")
+    # Simulate some time delay (e.g., processing time)
+    time.sleep(2)  # Sleep for 2 seconds to simulate work
+    print(f"Finished processing product: {product}")
+# Measure the time taken to process a product
+start_time = time.time()  # Record the start time
+product = "Product A"
+process_product(product)
+end_time = time.time()  # Record the end time
+elapsed_time = end_time - start_time  # Calculate elapsed time
+
+print(f"Time taken to process the product: {elapsed_time:.2f} seconds")

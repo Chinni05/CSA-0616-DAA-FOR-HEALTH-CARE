@@ -1,0 +1,25 @@
+def champagneTower(poured, query_row, query_glass):
+    # Create a 2D array representing the pyramid
+    tower = [[0] * (i + 1) for i in range(query_row + 1)]
+    
+    # Pour champagne into the top glass
+    tower[0][0] = poured
+    
+    # Distribute champagne to the glasses below
+    for row in range(query_row):
+        for glass in range(row + 1):
+            overflow = (tower[row][glass] - 1) / 2  # If there is overflow, distribute it
+            if overflow > 0:
+                tower[row + 1][glass] += overflow
+                tower[row + 1][glass + 1] += overflow
+    
+    # The query glass might have less than 1 unit if it's not filled
+    return min(1, tower[query_row][query_glass])
+
+# Example usage
+poured = 25  # Amount of champagne poured
+query_row = 6  # Row to check
+query_glass = 3  # Glass in that row to check
+
+result = champagneTower(poured, query_row, query_glass)
+print(f"Amount of champagne in glass {query_glass} of row {query_row}: {result:.2f}")

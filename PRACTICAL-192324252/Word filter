@@ -1,0 +1,11 @@
+def word_filter(text, banned_words):
+    """Filter out banned words from the given text."""
+    words = text.split()
+    filtered_words = [word for word in words if word.lower() not in banned_words]
+    return ' '.join(filtered_words)
+
+# Example usage
+banned_words = ['bad', 'ugly', 'hate']  # List of words to filter out
+text = "This is a bad and ugly example with some hate."
+filtered_text = word_filter(text, banned_words)
+print("Filtered Text:", filtered_text)

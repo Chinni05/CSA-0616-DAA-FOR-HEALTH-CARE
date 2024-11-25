@@ -1,0 +1,43 @@
+def is_safe(board, row, col):
+    # Check if the queen can be safely placed at (row, col)
+    for i in range(row):
+        if board[i] == col or abs(board[i] - col) == row - i:
+            return False
+    return True
+
+def solve_n_queens(n):
+    def backtrack(board, row):
+        if row == n:  # All queens placed
+            solutions.append(board.copy())
+            return
+        for col in range(n):
+            if is_safe(board, row, col):
+                board[row] = col
+                backtrack(board, row + 1)
+                board[row] = -1  # Backtrack
+    
+    solutions = []
+    board = [-1] * n  # Initialize the board with empty positions
+    backtrack(board, 0)
+    return solutions
+
+def print_solution(board):
+    n = len(board)
+    # Create a visual representation of the chessboard
+    for i in range(n):
+        row = ['Q' if board[i] == j else '.' for j in range(n)]
+        print(" ".join(row))
+    print()
+
+# Example usage for different values of N
+n = 4  # You can change this value to experiment with different N
+solutions = solve_n_queens(n)
+
+# Print all solutions
+if solutions:
+    print(f"Found {len(solutions)} solutions for N={n}:\n")
+    for idx, solution in enumerate(solutions):
+        print(f"Solution {idx + 1}:")
+        print_solution(solution)
+else:
+    print(f"No solution found for N={n}")

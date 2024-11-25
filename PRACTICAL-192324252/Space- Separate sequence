@@ -1,0 +1,7 @@
+# Example: Create a space-separated sequence of numbers
+numbers = [1, 2, 3, 4, 5]
+
+# Convert the list of numbers to a space-separated string
+sequence = " ".join(map(str, numbers))
+
+print("Space-separated sequence:", sequence)

@@ -1,0 +1,48 @@
+# Function to perform Greedy Graph Coloring
+def greedy_coloring(graph):
+    # Number of vertices in the graph
+    num_vertices = len(graph)
+    
+    # Initialize the result array, where -1 means no color assigned yet
+    result = [-1] * num_vertices
+    
+    # Assign the first color to the first vertex
+    result[0] = 0
+    
+    # A temporary array to store the available colors. 
+    available = [False] * num_vertices
+    
+    # Assign colors to the remaining vertices
+    for u in range(1, num_vertices):
+        # Mark all adjacent vertices' colors as unavailable
+        for v in graph[u]:
+            if result[v] != -1:
+                available[result[v]] = True
+        
+        # Find the first available color
+        color = 0
+        while color < num_vertices and available[color]:
+            color += 1
+        
+        # Assign the found color to the current vertex
+        result[u] = color
+        
+        # Reset the availability of colors for the next iteration
+        available = [False] * num_vertices
+    
+    # Print the color assigned to each vertex
+    print("Vertex Color Assignment:")
+    for vertex in range(num_vertices):
+        print(f"Vertex {vertex}: Color {result[vertex]}")
+    
+# Example usage
+# Graph represented as an adjacency list
+graph = {
+    0: [1, 2],
+    1: [0, 3, 4],
+    2: [0, 4],
+    3: [1],
+    4: [1, 2]
+}
+
+greedy_coloring(graph)

@@ -1,0 +1,26 @@
+def build_expression(nums, target):
+    def backtrack(index, expr, total):
+
+        if index == len(nums):
+            if total == target:
+                result.append(expr)
+            return
+        for sign in ['+', '-', '&']:
+            num = nums[index]
+            new_expr = expr + sign + str(num)
+            if sign == '+':
+                new_total = total + num
+            elif sign == '-':
+                new_total = total - num
+            else: 
+                new_total = total & num
+            backtrack(index + 1, new_expr, new_total)
+
+    result = []
+    if nums:
+        backtrack(1, str(nums[0]), nums[0]) 
+    return result
+nums = [1, 2, 3]
+target = 0
+expressions = build_expression(nums, target)
+print(expressions)

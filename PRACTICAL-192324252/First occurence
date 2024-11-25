@@ -1,0 +1,16 @@
+def first_occurrence(arr, target):
+    """Find the first occurrence of a target in the list."""
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i  # Return the index of the first occurrence
+    return -1  # Return -1 if the target is not found
+
+# Example usage
+arr = [10, 20, 30, 10, 40, 50]
+target = 10
+result = first_occurrence(arr, target)
+
+if result != -1:
+    print(f"The first occurrence of {target} is at index {result}.")
+else:
+    print(f"The element {target} is not in the list.")

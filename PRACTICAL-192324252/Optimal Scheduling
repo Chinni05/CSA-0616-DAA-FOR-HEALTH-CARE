@@ -1,0 +1,27 @@
+class Job:
+    def __init__(self, start, end, profit):
+        self.start = start
+        self.end = end
+        self.profit = profit
+def find_last_non_conflicting(jobs, index):
+    for i in range(index - 1, -1, -1):
+        if jobs[i].end <= jobs[index].start:
+            return i
+    return -1
+def job_scheduling(jobs):
+    jobs.sort(key=lambda job: job.end)
+    n = len(jobs)
+    dp = [0] * n
+    dp[0] = jobs[0].profit
+    for i in range(1, n):
+        include_profit = jobs[i].profit
+        last_non_conflicting = find_last_non_conflicting(jobs, i)
+        if last_non_conflicting != -1:
+            include_profit += dp[last_non_conflicting]
+        dp[i] = max(include_profit, dp[i - 1])
+    return dp[-1]
+jobs = [
+    Job(1, 3, 50),
+    Job(2, 5, 20),
+    Job(4, 6, 70),
+    Job(6, 7, 

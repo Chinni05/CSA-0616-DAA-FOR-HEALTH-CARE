@@ -1,0 +1,10 @@
+def segment_list(input_list, segment_size):
+    """Split a list into segments of a given size."""
+    return [input_list[i:i + segment_size] for i in range(0, len(input_list), segment_size)]
+
+# Example usage
+input_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+segment_size = 3
+
+segments = segment_list(input_list, segment_size)
+print("Segments:", segments)

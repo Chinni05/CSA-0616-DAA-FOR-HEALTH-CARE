@@ -1,0 +1,44 @@
+from collections import deque
+
+# Directions: Up, Down, Left, Right
+directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+
+def is_valid_move(x, y, grid, visited):
+    return 0 <= x < len(grid) and 0 <= y < len(grid[0]) and grid[x][y] == 0 and not visited[x][y]
+
+def bfs_min_path(grid, start, end):
+    rows, cols = len(grid), len(grid[0])
+    visited = [[False] * cols for _ in range(rows)]
+    queue = deque([(start[0], start[1], 0)])  # (x, y, distance)
+    
+    visited[start[0]][start[1]] = True
+
+    while queue:
+        x, y, dist = queue.popleft()
+
+        if (x, y) == end:
+            return dist
+
+        for dx, dy in directions:
+            new_x, new_y = x + dx, y + dy
+            if is_valid_move(new_x, new_y, grid, visited):
+                visited[new_x][new_y] = True
+                queue.append((new_x, new_y, dist + 1))
+    
+    return -1  # No path exists
+
+# Example usage
+grid = [
+    [0, 1, 0, 0],
+    [0, 1, 0, 1],
+    [0, 0, 0, 0],
+    [1, 1, 0, 0]
+]
+start = (0, 0)  # Starting point (row, col)
+end = (3, 3)    # Ending point (row, col)
+
+result = bfs_min_path(grid, start, end)
+if result != -1:
+    print(f"The minimum path distance is {result}")
+else:
+    print("No path exists.")

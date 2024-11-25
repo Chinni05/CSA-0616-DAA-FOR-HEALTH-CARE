@@ -1,0 +1,24 @@
+import math
+
+def distance(p1, p2):
+    """Calculate Euclidean distance between two points (p1, p2)."""
+    return math.sqrt((p1[0] - p2[0])**2 + (p1[1] - p2[1])**2)
+
+def sum_of_edge_distances(edges, points):
+    """Calculate the sum of distances of all edges in the graph."""
+    total_distance = 0
+    for edge in edges:
+        p1, p2 = points[edge[0]], points[edge[1]]  # Get the points for each edge
+        total_distance += distance(p1, p2)  # Add the distance of the edge
+    return total_distance
+
+# Example usage
+# Points represented as (x, y) coordinates
+points = [(0, 0), (1, 1), (2, 2), (3, 3)]
+
+# Edges are represented by tuples of indices of points
+edges = [(0, 1), (1, 2), (2, 3)]  # Edges between points (0,1), (1,2), (2,3)
+
+# Calculate the sum of distances of edges
+total_distance = sum_of_edge_distances(edges, points)
+print(f"Sum of edge distances: {total_distance:.2f}")

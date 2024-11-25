@@ -1,0 +1,6 @@
+from collections import Counter
+data = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4]
+frequency = Counter(data)
+print("Frequency of elements in the list:")
+for key, value in frequency.items():
+    print(f"{key}: {value}")

@@ -1,0 +1,72 @@
+class GraphGame:
+    def __init__(self):
+        self.graph = {}
+        self.visited_edges = set()
+        self.scores = [0, 0]  # Scores for Player 1 and Player 2
+        self.current_player = 0  # Start with Player 1
+
+    def add_edge(self, u, v, weight):
+        """Add an undirected edge with a weight."""
+        if u not in self.graph:
+            self.graph[u] = []
+        if v not in self.graph:
+            self.graph[v] = []
+        self.graph[u].append((v, weight))
+        self.graph[v].append((u, weight))
+
+    def display_graph(self):
+        """Display the graph."""
+        print("Graph:")
+        for node, edges in self.graph.items():
+            print(f"{node} -> {edges}")
+
+    def play_turn(self, u, v):
+        """Play a turn by traversing an edge."""
+        if (u, v) in self.visited_edges or (v, u) in self.visited_edges:
+            print("This edge has already been visited.")
+            return False
+
+        # Find the edge weight
+        for neighbor, weight in self.graph.get(u, []):
+            if neighbor == v:
+                self.scores[self.current_player] += weight
+                self.visited_edges.add((u, v))
+                print(f"Player {self.current_player + 1} traverses edge ({u}, {v}) with weight {weight}.")
+                self.current_player = 1 - self.current_player  # Switch player
+                return True
+
+        print("Invalid move. Edge does not exist.")
+        return False
+
+    def check_game_over(self):
+        """Check if all edges have been visited."""
+        total_edges = sum(len(edges) for edges in self.graph.values()) // 2
+        return len(self.visited_edges) == total_edges
+
+    def declare_winner(self):
+        """Declare the winner based on scores."""
+        print("\nGame Over!")
+        print(f"Player 1 Score: {self.scores[0]}")
+        print(f"Player 2 Score: {self.scores[1]}")
+        if self.scores[0] > self.scores[1]:
+            print("Player 1 wins!")
+        elif self.scores[1] > self.scores[0]:
+            print("Player 2 wins!")
+        else:
+            print("It's a tie!")
+
+# Example Usage
+game = GraphGame()
+game.add_edge(1, 2, 4)
+game.add_edge(1, 3, 3)
+game.add_edge(2, 3, 5)
+game.add_edge(2, 4, 2)
+
+game.display_graph()
+
+# Play the game
+while not game.check_game_over():
+    u, v = map(int, input("Enter two nodes to traverse (u v): ").split())
+    game.play_turn(u, v)
+
+game.declare_winner()

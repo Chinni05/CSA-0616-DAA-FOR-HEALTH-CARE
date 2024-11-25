@@ -1,0 +1,29 @@
+def large_group_intervals(s, threshold):
+    """
+    Find intervals of large groups in a string or list.
+
+    Args:
+        s: Input string or list.
+        threshold: Minimum size of a group to be considered large.
+
+    Returns:
+        List of intervals where each interval is a tuple (start, end).
+    """
+    intervals = []
+    start = 0
+    
+    for i in range(1, len(s) + 1):
+        # Check if the current group ends
+        if i == len(s) or s[i] != s[start]:
+            # If the group size meets the threshold, add the interval
+            if i - start >= threshold:
+                intervals.append((start, i - 1))
+            start = i  # Update start to the new group
+    
+    return intervals
+
+# Example usage
+input_string = "aaabbbbccddddeee"
+threshold = 3
+result = large_group_intervals(input_string, threshold)
+print(f"Large group intervals: {result}")

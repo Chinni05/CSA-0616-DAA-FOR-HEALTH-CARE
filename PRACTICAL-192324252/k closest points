@@ -1,0 +1,19 @@
+import math
+
+def distance(point, origin=(0, 0)):
+    """Calculate Euclidean distance between two points."""
+    return math.sqrt((point[0] - origin[0])**2 + (point[1] - origin[1])**2)
+
+def k_closest_points(points, k, origin=(0, 0)):
+    """Find the K closest points to the origin."""
+    # Sort points based on their distance from the origin
+    points.sort(key=lambda p: distance(p, origin))
+    # Return the first K points
+    return points[:k]
+
+# Example usage
+points = [(1, 2), (3, 4), (1, -1), (2, 2), (0, 1)]
+k = 3
+origin = (0, 0)
+closest = k_closest_points(points, k, origin)
+print(f"The {k} closest points to {origin} are: {closest}")

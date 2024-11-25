@@ -1,0 +1,13 @@
+def index_matrix(rows, cols):
+    """Creates a matrix where each element is its (row, column) index."""
+    matrix = [[(i, j) for j in range(cols)] for i in range(rows)]
+    return matrix
+
+# Example usage
+rows = 3
+cols = 4
+matrix = index_matrix(rows, cols)
+
+# Print the matrix
+for row in matrix:
+    print(row)

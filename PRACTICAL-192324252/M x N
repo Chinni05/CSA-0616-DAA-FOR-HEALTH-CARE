@@ -1,0 +1,12 @@
+def create_matrix(m, n):
+    # Create an m x n matrix initialized with 0
+    matrix = [[0 for _ in range(n)] for _ in range(m)]
+    return matrix
+
+# Example usage
+m = 3  # Number of rows
+n = 4  # Number of columns
+
+matrix = create_matrix(m, n)
+for row in matrix:
+    print(row)

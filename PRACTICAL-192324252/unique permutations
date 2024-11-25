@@ -1,0 +1,32 @@
+def unique_permutations(nums):
+    def backtrack(start):
+        # If the current list is a valid permutation, add it to the result
+        if start == len(nums):
+            result.append(nums[:])
+            return
+
+        # Try placing each number in the current position
+        for i in range(start, len(nums)):
+            # Skip duplicates
+            if i > start and nums[i] == nums[start]:
+                continue
+
+            # Swap the current element with the start
+            nums[start], nums[i] = nums[i], nums[start]
+            
+            # Recurse for the next position
+            backtrack(start + 1)
+            
+            # Undo the swap (backtrack)
+            nums[start], nums[i] = nums[i], nums[start]
+
+    # Sort the list to ensure duplicates are adjacent
+    nums.sort()
+    result = []
+    backtrack(0)
+    return result
+
+# Example usage
+nums = [1, 1, 2]
+permutations = unique_permutations(nums)
+print(permutations)
